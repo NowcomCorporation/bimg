@@ -200,6 +200,7 @@ type Options struct {
 	Embed          bool
 	Flip           bool
 	Flop           bool
+	Box            bool
 	Force          bool
 	NoAutoRotate   bool
 	NoProfile      bool
