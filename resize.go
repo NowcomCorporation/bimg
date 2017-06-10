@@ -47,6 +47,18 @@ func Resize(buf []byte, o Options) ([]byte, error) {
 	inWidth := int(image.Xsize)
 	inHeight := int(image.Ysize)
 
+	if o.Box {
+		inWidthHeightRatio := inWidth / inHeight;
+		outWidthHeightRatio := o.Width / o.Height;
+		if outWidthHeightRatio < inWidthHeightRatio {
+			// Width is the limiting factor
+			o.Height = int( inHeight * o.Width / inWidth )
+		} else {
+			o.Width = int( inWidth * o.Height / inHeight )
+		}
+		o.Force = true
+	}
+
 	// Infer the required operation based on the in/out image sizes for a coherent transformation
 	normalizeOperation(&o, inWidth, inHeight)
 
